@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body onselectstart="return false;">
+	<div class="wrap">
+		<div class="box">
+			<ul class="list">
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+			</ul>
+			<div class="info">
+				<span>商品公合计：<em>0</em>件</span>
+				<span>共花费了：<em>0</em>元</span>
+				<br />
+				<br />
+				<span>其中最贵的商品单价是：<em>0</em>元</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		var oLis = document.getElementsByTagName("li"),
+			info = document.getElementsByClassName("info")[0],
+			ems = info.getElementsByTagName("em");
+		for (var i = 0; i < oLis.length; i++) {
+			addClick(oLis[i])
+		}
+		function addClick(curLi) {
+			var tagI = curLi.getElementsByTagName("i"),
+				strong = curLi.getElementsByTagName("strong");
+			tagI[0].onclick = function () {
+				var val = Number(this.nextElementSibling.innerHTML);
+				val--;
+				if (val <= 0) {
+					this.nextElementSibling.innerHTML = 0;
+					val = 0;
+				} else {
+					this.nextElementSibling.innerHTML = val;
+				}
+				strong[1].innerHTML = parseFloat(strong[0].innerHTML) * val + "元"
+				computed()
+			}
+			tagI[1].onclick = function () {
+				var val = Number(this.previousElementSibling.innerHTML);
+				val++;
+				this.previousElementSibling.innerHTML = val;
+				strong[1].innerHTML = parseFloat(strong[0].innerHTML) * val + "元"
+				computed()
+			}
+		}
+		function computed() {
+			var val1 = 0,
+				val2 = 0,
+				ary=[0];
+			for (var i = 0; i < oLis.length; i++) {
+				var em = oLis[i].getElementsByTagName("em")[0],
+					strong = oLis[i].getElementsByTagName("strong");
+				val1 += Number(em.innerHTML);
+				val2 += parseFloat(strong[1].innerHTML)
+				if (Number(em.innerHTML)>=1) {
+					ary.push(parseFloat(strong[0].innerHTML))
+				}
+			}
+			ems[0].innerHTML = val1;
+			ems[1].innerHTML = val2;
+			ary.sort(function(a,b){return a-b})
+			ems[2].innerHTML = ary[ary.length-1]
+		}
+	</script>
+</body>
+
+</html>
