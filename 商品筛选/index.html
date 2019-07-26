@@ -147,36 +147,5 @@
 		</section>
 	</div>
 </body>
-<script>
-	var eChoose = document.getElementById("choose"),
-		eType = document.getElementById("type"),
-		eLis = eType.getElementsByTagName("li");
-
-	for (let j = 0; j < eLis.length; j++) {
-		let eA = eLis[j].getElementsByTagName("a");
-		for (let i = 0; i < eA.length; i++) {
-			eA[i].onclick = function () {
-				var Choose_mark = document.createElement("mark"),
-					Choose_mark_me = document.createElement("me"),
-					Choose_mark_a = document.createElement("a");
-
-				for (let g = 0; g < eA.length; g++) {
-					eA[g].style.color = "#000";
-				}
-				this.style.color = "#28a5c4";
-
-				eChoose.appendChild(Choose_mark);
-				Choose_mark.appendChild(Choose_mark_me);
-				Choose_mark_me.innerHTML = this.innerHTML;
-				Choose_mark.appendChild(Choose_mark_a);
-				Choose_mark_a.innerHTML = "x";
-				Choose_mark_a.onclick = function () {
-					eA[i].style.color = "#000";
-					eChoose.removeChild(Choose_mark)
-				}
-			}
-		}
-	}
-</script>
-
+<script src="index.js"></script>
 </html>
